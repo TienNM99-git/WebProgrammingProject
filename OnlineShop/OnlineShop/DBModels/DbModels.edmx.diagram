@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="a70edfbba46f4de093f738234410075c" Name="Diagram1">
+        <EntityTypeShape EntityType="DepartmentManagementModel.Category" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.Customer" Width="1.5" PointX="6" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.Order" Width="1.5" PointX="9.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.OrderDetail" Width="1.5" PointX="5.25" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.Product" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.Supplier" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="DepartmentManagementModel.sysdiagram" Width="1.5" PointX="2.75" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="DepartmentManagementModel.FK_Order_Customer1" ManuallyRouted="false" />
+        <AssociationConnector Association="DepartmentManagementModel.FK_OrderDetail_Order" ManuallyRouted="false" />
+        <AssociationConnector Association="DepartmentManagementModel.FK_OrderDetail_Product" ManuallyRouted="false" />
+        <AssociationConnector Association="DepartmentManagementModel.FK_Product_Supplier" ManuallyRouted="false" />
+        <AssociationConnector Association="DepartmentManagementModel.ProductCategory" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

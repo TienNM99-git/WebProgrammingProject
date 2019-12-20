@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="Default Web Site" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\C\#Practice\\OnlineShop\\OnlineShop\\obj\\Release\\Package\\PackageTmp$" />
+    <parameterEntry kind="ProviderPath" scope="setAcl" match="^D:\\C\#Practice\\OnlineShop\\OnlineShop\\obj\\Release\\Package\\PackageTmp$" />
+  </parameter>
+  <parameter name="DbModels-Web.config Connection String" description="" value="metadata=res://*/DBModels.DbModels.csdl|res://*/DBModels.DbModels.ssdl|res://*/DBModels.DbModels.msl;provider=System.Data.SqlClient;provider connection string=&quot;Data Source=DESKTOP-6EUFOAO\SQLEXPRESS;Initial Catalog=DepartmentManagement;Integrated Security=True&quot;" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\C\#Practice\\OnlineShop\\OnlineShop\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DbModels']/@connectionString" />
+  </parameter>
+  <parameter name="DefaultConnection-Web.config Connection String" description="" value="Data Source=(LocalDb)\MSSQLLocalDB;AttachDbFilename=|DataDirectory|\aspnet-OnlineShop-20191213030800.mdf;Initial Catalog=aspnet-OnlineShop-20191213030800;Integrated Security=True" tags="">
+    <parameterEntry kind="XmlFile" scope="D:\\C\#Practice\\OnlineShop\\OnlineShop\\obj\\Release\\Package\\PackageTmp\\Web\.config$" match="/configuration/connectionStrings/add[@name='DefaultConnection']/@connectionString" />
+  </parameter>
+</parameters>

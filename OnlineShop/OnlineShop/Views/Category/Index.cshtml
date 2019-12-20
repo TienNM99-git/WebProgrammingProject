@@ -1,0 +1,55 @@
+﻿@model IEnumerable<OnlineShop.DBModels.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class="card-body">
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group" style="margin-bottom:10px">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>CategoryID</th>
+                    <th>Category name</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>                     
+                        <td>@item.CategoryID</td>
+                        <td>@item.CategoryName</td>
+                        <td style="width:400px">
+
+
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Edit", "Category", new { id = item.CategoryID } )">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit</span>
+                            </a>
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Delete", "Category", new { id = item.CategoryID })">
+                                <i class="fa fa-trash"></i>
+                                <span>Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a style="display:block; width:200px;" class="btn btn-primary btn-block" href="@Url.Action("Create", "Category")">
+            <i class="fas fa-plus"></i>
+            <span>Add a new category</span>
+        </a>
+    </div>
+</div>

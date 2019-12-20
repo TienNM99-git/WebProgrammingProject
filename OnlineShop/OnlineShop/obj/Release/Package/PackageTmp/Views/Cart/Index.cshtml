@@ -1,0 +1,105 @@
+﻿
+@using OnlineShop.Models
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+
+
+@{
+    if (Session["Cart"] != null)
+    {
+        using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post))
+        {
+
+            <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable"  cellspacing="0">
+                    <thead>
+                        <tr>
+                            <td>Image</td>
+                            <td>Product ID</td>
+                            <td>Product name</td>
+                            <td>Price</td>
+                            <td>Quantity</td>
+                            <td>Sub total</td>
+                            <td>Option</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var cart in (List<CartItem>)Session["Cart"])
+                        {
+                            <tr>
+                                <td>
+                                    <img src="@cart.Product.ImageURL" width="80" , height="50" />
+                                </td>
+                                <td>@cart.Product.Pid</td>
+                                <td>@cart.Product.ProductName</td>
+                                <td>$@cart.Product.Price</td>
+                                <td>
+                                    <input type="text" name="quantity" id="quantity" value="@cart.Quantity" />
+                                    &nbsp;<span id="errmsg" style="color:red"></span>
+                                </td>
+                                <td>$@(String.Format("{0:N0}", cart.Product.Price * cart.Quantity))</td>
+                                <td>
+                                    <a style="display:inline" class="nav-link" href="@Url.Action("Delete", "Cart", new { id = cart.Product.Pid })">
+                                        <i class="fa fa-trash"></i>
+                                        <span>Remove from cart</span>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <td colspan="6" style="color:red; font-size:30px">Total</td>
+                            <td>
+                                @{
+                                    List<CartItem> temp = (List<CartItem>)Session["Cart"];
+                                    var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.Price));
+                                }
+
+                                $@total 
+                            </td>
+                        </tr>
+                    </tfoot>
+
+                </table>
+            </div>
+
+            <input type="submit" class="btn btn-primary" value="Update Cart" />
+
+            <a href="javascript:void(0);" onclick="history.go(-1);" class="btn btn-primary">Continue shoping</a>
+
+            <a href="@Url.Action("CheckOut", "Cart")" class="btn btn-primary">Check out</a>
+
+
+
+        }
+    }
+    else
+    {
+        <h4>No item in your cart !!!</h4>
+    }
+
+
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        //called when key is pressed in textbox
+        $("#quantity").keypress(function (e) {
+            //if a letter is not a digit, we will display the error message and don't allow them to type anything
+            if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                $("#errmsg").html("Enter digit only!").show().fadeOut("slow");
+                return false;
+            }
+        });
+    });
+</script>
+
+                                    }
+
+

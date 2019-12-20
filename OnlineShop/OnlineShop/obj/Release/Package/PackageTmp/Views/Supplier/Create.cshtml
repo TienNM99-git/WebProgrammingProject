@@ -1,0 +1,64 @@
+﻿@model OnlineShop.DBModels.Supplier
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2>Add a new supplier</h2>
+
+
+<div class="form-horizontal">
+    <h4>Supplier</h4>
+    <hr />
+
+    <form id="myForm">
+      <div class="form-group">
+            @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SupplierName, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnCreate" style="width:200px" value="Create" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnCreate").click(function () {
+            debugger
+
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+
+                url: '/Supplier/CreateSup',
+                type: "POST",
+                data: data,
+                datatype: 'json',
+                success: function (res) {
+                    debugger
+                    if (res.Result === true) {
+                        window.location.href = "/Supplier/Index";
+                    }
+                    else {
+                        alert("Create supplier failed !!");
+                    }
+                }
+            })
+
+        })
+    })
+
+
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -1,0 +1,73 @@
+﻿@model OnlineShop.DBModels.Category
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2>Edit category</h2>
+<h2 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Edit category</h2>
+
+<div class="form-horizontal">
+    <hr />
+    <form id="myForm">
+        @Html.HiddenFor(model => model.CategoryID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="button" id="btnEdit" style="width:200px" value="Save" class="btn btn-primary btn-block" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $("#btnEdit").click(function () {
+            debugger
+
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                
+                url: '/Category/EditCate',
+                type: "POST",
+                data: data,
+                datatype: 'JSON',
+                success: function (res) {
+                    debugger
+                    if (res.Result === true) {
+                        window.location.href = "/Category/Index";
+                    }
+                    else {
+                        alert("Edit category failed !!");
+                    }
+
+                }
+
+            })
+
+
+
+        })
+
+
+    })
+
+
+</script>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

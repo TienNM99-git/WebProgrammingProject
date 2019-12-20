@@ -1,0 +1,52 @@
+﻿@model IEnumerable<OnlineShop.DBModels.Customer>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class="card-body">
+    <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Phone</th>
+                    
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.Cid</td>
+                        <td>@item.Name</td>
+                        <td>@item.Username</td>
+                        <td>@item.Phone</td>
+                        <td>@item.Address</td>
+                        <td style="width:220px">
+                            
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Edit", "Customer", new { id = item.Cid } )">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit</span>
+                            </a>
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Delete", "Customer", new { id = item.Cid })">
+                                <i class="fa fa-trash"></i>
+                                <span>Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <a style="display:block; width:200px;" class="btn btn-primary btn-block" href="@Url.Action("Create", "Customer")">
+            <i class="fas fa-plus"></i>
+            <span>Add a new customer</span>
+        </a>
+    </div>
+</div>
+

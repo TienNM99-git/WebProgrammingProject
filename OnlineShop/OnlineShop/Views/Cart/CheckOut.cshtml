@@ -1,0 +1,129 @@
+﻿@using OnlineShop.Models
+@using OnlineShop.DBModels
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2>Check Out Shopping Cart</h2>
+
+@{
+    if (Session["Cart"] != null)
+    {
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" cellspacing="0">
+                <thead>
+                    <tr>
+                        <td>Image</td>
+                        <td>Product ID</td>
+                        <td>Product name</td>
+                        <td>Price</td>
+                        <td>Quantity</td>
+                        <td>Sub total</td>
+                        <td>Option</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var cart in (List<CartItem>)Session["Cart"])
+                    {
+                        <tr>
+                            <td>
+                                <img src="@cart.Product.ImageURL" width="80" , height="50" />
+                            </td>
+                            <td>@cart.Product.Pid</td>
+                            <td>@cart.Product.ProductName</td>
+                            <td>$@cart.Product.Price</td>
+                            <td>
+                                <input type="text" name="quantity" id="quantity" value="@cart.Quantity" readonly />
+                                &nbsp;<span id="errmsg" style="color:red"></span>
+                            </td>
+                            <td>$@(String.Format("{0:N0}", cart.Product.Price * cart.Quantity))</td>
+                        </tr>
+                    }
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="6" style="color:red; font-size:30px">Total</td>
+                        <td>
+                            @{
+                                List<CartItem> temp = (List<CartItem>)Session["Cart"];
+                                var total = String.Format("{0:N0}", temp.Sum(x => x.Quantity * x.Product.Price));
+                            }
+
+                            $@total 
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+        </div>
+
+    }
+    else
+    {
+        <h4>No item in your cart !!!</h4>
+    }
+}
+
+@{ 
+    DbModels db = new DbModels();
+    Customer admin = db.Customers.Find(Session["AdminID"]);
+    Customer cus = db.Customers.Find(Session["UserID"]);
+}
+
+@using (Html.BeginForm("ProcessOrder", "Cart", FormMethod.Post, new { id = "customer-form" }))
+{
+    <table class="table table-bordered" id="dataTable"  cellspacing="0">
+        <tr>
+            <td colspan="3" style="text-align:center"><b>Customer's Information</b></td>
+        </tr>
+        @if (Session["AdminID"] != null)
+        {
+            <tr>
+                <td> Customer Name: </td>
+                <td><input type="text" name="cusName" value="@admin.Name" /></td>
+            </tr>
+            <tr>
+                <td> Customer Phone: </td>
+                <td><input type="text" name="cusPhone" value="@admin.Phone" /></td>
+            </tr>
+            <tr>
+                <td> Customer Address: </td>
+                <td><input type="text" name="cusAddress" value="@admin.Address" /></td>
+            </tr>
+        }
+        else if (Session["UserID"] != null)
+        {
+            <tr>
+                <td> Customer Name: </td>
+                <td><input type="text" name="cusName" value="@cus.Name" /></td>
+            </tr>
+            <tr>
+                <td> Customer Phone: </td>
+                <td><input type="text" name="cusPhone" value="@cus.Phone" /></td>
+            </tr>
+            <tr>
+                <td> Customer Address: </td>
+                <td><input type="text" name="cusAddress" value="@cus.Address" /></td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="3"><input type="submit" class="btn btn-primary" value="Process Order" /></td>
+        </tr>
+    </table>
+}
+
+<script type="text/javascript">
+    $("#customer-form").validate({
+        rules: {
+            cusName: {
+                required: true
+            },
+            cusPhone: {
+                required: true
+            }
+        }
+    });
+</script>

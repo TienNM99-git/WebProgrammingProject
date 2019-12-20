@@ -1,0 +1,81 @@
+﻿@model OnlineShop.DBModels.Product
+@{
+    ViewBag.Title = "ProductDetail";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: auto;
+    }
+
+    #productImages {
+        background: #fff;
+        width: 300px;
+        float: left;
+        margin-right: 10px;
+        border-width: 3px;
+        border-style: solid;
+        border-image: linear-gradient(to bottom, orange, rgba(0, 0, 0, 0)) 1 100%;
+    }
+
+    #productImages img{
+        height: 200px;
+        width : 200px;
+    }
+
+    #productInformation {
+        padding: 5px;
+        margin-top: 50px;
+        display: block !important;
+    }
+</style>
+
+
+<div class="container">
+
+    <div id="productImages">
+        <img src="@Model.ImageURL" />
+
+    </div>
+
+    <div id="productInformation">
+        <table class="table table-striped" style="display: inline;">
+            <tbody>
+                
+                <tr>
+                    <th scope="row">Product Name</th>
+                    <td id="productName">@Model.ProductName</td>
+
+                </tr>
+                
+                <tr>
+                    <th scope="row">ID</th>
+                    <td id="productID">@Model.Pid</td>
+                </tr>
+
+                
+                <tr>
+                    <th scope="row">Quantity</th>
+                    <td id="quantity">@Model.Quantitty</td>
+                </tr>
+
+                <tr>
+                    <th scope="row">Price</th>
+                    <td id="quantity">$@Model.Price</td>
+                </tr>
+
+
+
+
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+
+

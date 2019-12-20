@@ -1,0 +1,76 @@
+﻿@model OnlineShop.DBModels.Supplier
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<h2 style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Edit supplier</h2>
+
+
+
+<div class="form-horizontal">
+    <hr />
+    <form id="myForm">
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.Sid)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.SupplierName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.SupplierName, new { htmlAttributes = new { @class = "form-control" } })
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="button" id="btnEdit" style="width:200px" value="Save" class="btn btn-primary btn-block" />
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function () {
+
+
+        $("#btnEdit").click(function () {
+            debugger
+
+            var data = $("#myForm").serialize();
+
+            $.ajax({
+                url: '/Supplier/EditSup',
+                type: "POST",
+                data: data,
+                datatyp: 'JSON',
+                success: function (res) {
+                    debugger
+                    if(res.Result === true)
+                    {
+                        window.location.href = "/Supplier/Index";
+                    }
+                    else
+                    {
+                        alert("Edit supplier failed !!!");
+                    }
+                }
+
+
+
+            })
+
+
+        })
+
+    })
+
+
+</script>
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

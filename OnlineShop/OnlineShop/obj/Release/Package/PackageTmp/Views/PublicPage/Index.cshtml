@@ -1,0 +1,54 @@
+﻿@model IEnumerable<OnlineShop.DBModels.Product>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<style>
+    .main-content{
+        float:left;
+        padding: 5px 10px 10px 5px;
+        padding-left: 10px;
+    }
+    .content-image img{
+        height:160px;
+        width:160px;
+    }
+
+    .content-name{
+        font-weight:600;
+        padding-left: 20px;
+    }
+
+    .content-price{
+        color:red;
+        font-weight:600;
+        padding-left: 20px;
+    }
+
+
+</style>
+
+@foreach (var item in Model)
+{
+    <div class="main-content">
+        <div class="content-image">
+            <img src="@item.ImageURL"/>
+        </div>
+        <div class="content-name">
+            @item.ProductName 
+        </div>
+        <div class="content-price">
+            Price: $@item.Price
+        </div>
+        <div class="addtoCart">
+            <a style="display:inline" class="nav-link" href="@Url.Action("AddItem", "Cart", new { id = item.Pid})">
+                <i class="fas fa-shopping-cart"></i>
+                <span>Buy</span>
+            </a>
+        </div>
+        
+    </div>
+}

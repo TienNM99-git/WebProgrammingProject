@@ -1,0 +1,61 @@
+﻿@model IEnumerable<OnlineShop.DBModels.Product>
+
+@{
+    ViewBag.Title = "Product";
+    Layout = "~/Views/Shared/_mainLayout.cshtml";
+}
+
+<div class="card-body">
+    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+        <div class="input-group" style="margin-bottom:10px">
+            <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
+            <div class="input-group-append">
+                <button class="btn btn-primary" type="button">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+        </div>
+    </form>
+    <div class="table-responsive">
+        <table class="table table-bordered" width="100%" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <img src="@item.ImageURL" width="80" , height="50" />
+                        </td>
+                        <td>@item.ProductName</td>
+                        <td>$@item.Price</td>
+                        <td>@item.Quantitty</td>
+                        <td style="width:400px">
+
+                           
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Edit", "Product", new { id = item.Pid } )">
+                                <i class="fas fa-edit"></i>
+                                <span>Edit</span>
+                            </a>
+                            <a style="display:inline" class="nav-link" href="@Url.Action("Delete", "Product", new { id = item.Pid })">
+                                <i class="fa fa-trash"></i>
+                                <span>Delete</span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a style="display:block; width:200px;" class="btn btn-primary btn-block" href="@Url.Action("Create", "Product")">
+            <i class="fas fa-plus"></i>
+            <span>Add a new product</span>
+        </a>
+    </div>
+</div>
